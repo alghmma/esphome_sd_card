@@ -1,6 +1,5 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome.components.esp32 import require_fatfs
 from esphome import automation, pins
 from esphome.const import (
     CONF_ID,
@@ -17,6 +16,12 @@ from esphome.components.esp32.const import (
     VARIANT_ESP32,
     VARIANT_ESP32S3,
 )
+
+try:
+    from esphome.components.esp32 import require_fatfs
+except ImportError:
+    def require_fatfs():
+        pass
 
 DEPENDENCIES = ["esp32"]
 
