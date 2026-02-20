@@ -1,5 +1,6 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
+from esphome.components.esp32 import require_fatfs
 from esphome.components import web_server_base
 from esphome.components.web_server_base import CONF_WEB_SERVER_BASE_ID
 from esphome.const import (
@@ -40,6 +41,7 @@ CONFIG_SCHEMA = cv.All(
 
 @coroutine_with_priority(45.0)
 async def to_code(config):
+    require_fatfs()
     paren = await cg.get_variable(config[CONF_WEB_SERVER_BASE_ID])
     
     var = cg.new_Pvariable(config[CONF_ID], paren)

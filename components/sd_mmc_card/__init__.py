@@ -1,5 +1,6 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
+from esphome.components.esp32 import require_fatfs
 from esphome import automation, pins
 from esphome.const import (
     CONF_ID,
@@ -69,6 +70,7 @@ CONFIG_SCHEMA = cv.All(
 )
 
 async def to_code(config):
+    require_fatfs()
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
 
